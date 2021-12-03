@@ -30,9 +30,9 @@ jobs:
       - name: Sets build date
         run: echo "BUILD_DATE=$(date '+%Y%m%d')" >> $GITHUB_ENV
       - name: Add JdkVersion to GITHUB_ENV
-        run: tail ./configarm64.json | python -c 'import json,sys;obj=json.load(sys.stdin);print(str(obj["JdkVersion"]).replace(":", "-"))' >> $GITHUB_ENV
+        run: tail ./configarm64.json | python -c 'import json,sys;obj=json.load(sys.stdin);print('JdkVersion='+str(obj["JdkVersion"]).replace(":", "-"))' >> $GITHUB_ENV
       - name: Add ChromeVersion to GITHUB_ENV
-        run: tail ./configarm64.json | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["ChromeVersion"])' >> $GITHUB_ENV
+        run: tail ./configarm64.json | python -c 'import json,sys;obj=json.load(sys.stdin);print('ChromeVersion='+obj["ChromeVersion"])' >> $GITHUB_ENV
 
       - name: check chrome_version
         run:  |
