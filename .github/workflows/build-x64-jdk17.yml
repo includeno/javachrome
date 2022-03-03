@@ -8,9 +8,9 @@ on: # push operation is operate
     branches: [main]
 # CI enviroment settings
 env:
-  TAG_NAME: "javachrome"
-  #JdkVersion: "openjdk-11.0.10-jdk"#define in file "configx64.json"
-  #ChromeVersion: "92.0.4515.43" #define in file "configx64.json"
+  TAG_NAME: "jdk17chrome"
+  #JdkVersion: "openjdk-11.0.10-jdk"#define in file "configx64-jdk17.json"
+  #ChromeVersion: "92.0.4515.43" #define in file "configx64-jdk17.json"
 jobs:
   build:
     name: x64 docker image
@@ -31,9 +31,9 @@ jobs:
         run: echo "BUILD_DATE=$(date '+%Y%m%d')" >> $GITHUB_ENV
       
       - name: Add JdkVersion to GITHUB_ENV
-        run: tail ./configx64.json | python -c 'import json,sys;obj=json.load(sys.stdin);print("JdkVersion="+str(obj["JdkVersion"]).replace(":", "-"))' >> $GITHUB_ENV
+        run: tail ./configx64-jdk17.json | python -c 'import json,sys;obj=json.load(sys.stdin);print("JdkVersion="+str(obj["JdkVersion"]).replace(":", "-"))' >> $GITHUB_ENV
       - name: Add ChromeVersion to GITHUB_ENV
-        run: tail ./configx64.json | python -c 'import json,sys;obj=json.load(sys.stdin);print("ChromeVersion="+obj["ChromeVersion"])' >> $GITHUB_ENV
+        run: tail ./configx64-jdk17.json | python -c 'import json,sys;obj=json.load(sys.stdin);print("ChromeVersion="+obj["ChromeVersion"])' >> $GITHUB_ENV
       - name: check chrome_version
         run:  |
           echo ${{env.JdkVersion}}
